@@ -11,8 +11,8 @@ public class Intake {
     public enum IntakeState {
         INTAKE, STOP, REVERSE
     }
-    public IntakeState state;
-    private DcMotorEx intake;
+    private IntakeState state = IntakeState.STOP;
+    private final DcMotorEx intake;
 
     public Intake(HardwareMap hardwareMap) {
         intake = hardwareMap.get(DcMotorEx.class, "intake");
@@ -36,6 +36,7 @@ public class Intake {
                 intake.setPower(-1.0);
                 break;
         }
+    }
 
     public void setIntakeState(IntakeState state) {
         this.state = state;
