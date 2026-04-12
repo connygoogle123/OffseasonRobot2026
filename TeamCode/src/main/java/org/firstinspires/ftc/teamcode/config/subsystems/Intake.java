@@ -7,12 +7,17 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public class Intake {
-
     public enum IntakeState {
         INTAKE, STOP, REVERSE
     }
     private IntakeState state = IntakeState.STOP;
     private final DcMotorEx intake;
+    private RGB rgb;
+
+    // Tune current levels
+    double ONE_BALL = 2.0;
+    double TWO_BALLS = 3.5;
+    double THREE_BALLS = 5.0;
 
     public Intake(HardwareMap hardwareMap) {
         intake = hardwareMap.get(DcMotorEx.class, "intake");
@@ -22,6 +27,33 @@ public class Intake {
 
     public double getCurrent() {
         return intake.getCurrent(CurrentUnit.AMPS);
+    }
+    public int getBallCount() {
+        double current = getCurrent();
+
+        if (current > 5.0) {
+            return 3;
+        } else if (current > 3.5) {
+            return 2;
+        } else if (current > 2.0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public void updateLight() {
+        int balls = getBallCount();
+
+        if (balls == 1) {
+            rgb.orange();
+        } else if (balls == 2) {
+            rgb.yellow();
+        } else if (balls >= 3) {
+            rgb.green();
+        } else {
+            rgb.off();
+        }
     }
 
     public void update() {
