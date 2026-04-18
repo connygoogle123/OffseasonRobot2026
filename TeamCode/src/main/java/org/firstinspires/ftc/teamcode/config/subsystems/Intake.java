@@ -2,8 +2,10 @@ package org.firstinspires.ftc.teamcode.config.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.config.subsystems.RGB;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public class Intake {
@@ -12,8 +14,8 @@ public class Intake {
     }
     private IntakeState state = IntakeState.STOP;
     private final DcMotorEx intake;
-    private RGB rgb;
 
+    private RGB ballLight;
     // Tune current levels
     double ONE_BALL = 2.0;
     double TWO_BALLS = 3.5;
@@ -23,6 +25,9 @@ public class Intake {
         intake = hardwareMap.get(DcMotorEx.class, "intake");
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         intake.setDirection(DcMotor.Direction.REVERSE);
+
+        Servo rgbServo = hardwareMap.get(Servo.class, "rgb1");
+        ballLight = new RGB(rgbServo);
     }
 
     public double getCurrent() {
@@ -46,13 +51,13 @@ public class Intake {
         int balls = getBallCount();
 
         if (balls == 1) {
-            rgb.orange();
+            ballLight.orange();
         } else if (balls == 2) {
-            rgb.yellow();
+            ballLight.yellow();
         } else if (balls >= 3) {
-            rgb.green();
+            ballLight.green();
         } else {
-            rgb.off();
+            ballLight.off();
         }
     }
 

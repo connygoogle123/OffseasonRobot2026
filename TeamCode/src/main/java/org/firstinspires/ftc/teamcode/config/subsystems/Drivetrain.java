@@ -11,7 +11,7 @@ public class Drivetrain {
     private final DcMotorEx backLeft;
     private final DcMotorEx backRight;
 
-    private double driveSpeedMultiplier = 1.0;
+    private double driveSpeedMultiplier = 1.0; // full speed 312
 
     public Drivetrain(HardwareMap hardwareMap) {
         frontLeft = hardwareMap.get(DcMotorEx.class, "FL");

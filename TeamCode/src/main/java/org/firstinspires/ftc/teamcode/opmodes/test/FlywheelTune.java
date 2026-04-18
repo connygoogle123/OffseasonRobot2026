@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-@TeleOp
+@TeleOp(name="Flywheel Tuner", group="Test")
 public class FlywheelTune extends OpMode{
     public DcMotorEx flywheelMotorLeft;
     public DcMotorEx flywheelMotorRight;
