@@ -70,7 +70,7 @@ public class Shooter {
         flywheelMotorRight.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidf);
     }
 
-    public void setTargetVelocity(double velocity) {
+    public void setTargetVelocity(double targetVelocity) {
         this.targetVelocity = targetVelocity;
     }
     public void requestSpinUp(double velocity) {
